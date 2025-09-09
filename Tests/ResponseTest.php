@@ -421,7 +421,7 @@ class ResponseTest extends ResponseTestCase
 
     public function testDefaultContentType()
     {
-        $headerMock = $this->createMock('Symfony\Component\HttpFoundation\ResponseHeaderBag', array('set'));
+        $headerMock = $this->createPartialMock('Symfony\Component\HttpFoundation\ResponseHeaderBag', array('set'));
         $headerMock->expects($this->at(0))
             ->method('set')
             ->with('Content-Type', 'text/html');
