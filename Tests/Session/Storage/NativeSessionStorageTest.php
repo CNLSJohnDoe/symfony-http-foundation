@@ -164,6 +164,11 @@ class NativeSessionStorageTest extends \PHPUnit_Framework_TestCase
             $gco['cookie_'.$key] = $value;
         }
 
+        // PHP 7.3+ adds a "samesite" key to session cookie params; ignore for legacy expectations
+        if (isset($gco['cookie_samesite'])) {
+            unset($gco['cookie_samesite']);
+        }
+
         $this->assertEquals($options, $gco);
     }
 
