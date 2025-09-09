@@ -1497,7 +1497,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $class = new \ReflectionClass('Symfony\\Component\\HttpFoundation\\Request');
         $property = $class->getProperty('httpMethodParameterOverride');
         $property->setAccessible(true);
-        $property->setValue(false);
+        $property->setValue(null,false);
     }
 
     private function getRequestInstanceForClientIpTests($remoteAddr, $httpForwardedFor, $trustedProxies)

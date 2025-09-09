@@ -39,7 +39,7 @@ class IpUtils
             $ips = array($ips);
         }
 
-        $method = substr_count($requestIp, ':') > 1 ? 'checkIp6' : 'checkIp4';
+        $method = substr_count($requestIp ?: "", ':') > 1 ? 'checkIp6' : 'checkIp4';
 
         foreach ($ips as $ip) {
             if (self::$method($requestIp, $ip)) {
@@ -76,7 +76,7 @@ class IpUtils
             $netmask = 32;
         }
 
-        return 0 === substr_compare(sprintf('%032b', ip2long($requestIp)), sprintf('%032b', ip2long($address)), 0, $netmask);
+        return 0 === substr_compare(sprintf('%032b', ip2long($requestIp ?: "")), sprintf('%032b', ip2long($address)), 0, $netmask);
     }
 
     /**

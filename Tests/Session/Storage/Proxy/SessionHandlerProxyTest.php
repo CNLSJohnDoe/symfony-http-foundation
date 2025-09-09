@@ -35,7 +35,7 @@ class SessionHandlerProxyTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->mock = $this->getMock('SessionHandlerInterface');
+        $this->mock = $this->createMock('SessionHandlerInterface');
         $this->proxy = new SessionHandlerProxy($this->mock);
     }
 

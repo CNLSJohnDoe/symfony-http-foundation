@@ -36,6 +36,7 @@ class WriteCheckSessionHandler implements \SessionHandlerInterface
     /**
      * {@inheritdoc}
      */
+    #[\ReturnTypeWillChange]
     public function close()
     {
         return $this->wrappedSessionHandler->close();
@@ -44,6 +45,7 @@ class WriteCheckSessionHandler implements \SessionHandlerInterface
     /**
      * {@inheritdoc}
      */
+    #[\ReturnTypeWillChange]
     public function destroy($sessionId)
     {
         return $this->wrappedSessionHandler->destroy($sessionId);
@@ -52,6 +54,7 @@ class WriteCheckSessionHandler implements \SessionHandlerInterface
     /**
      * {@inheritdoc}
      */
+    #[\ReturnTypeWillChange]
     public function gc($maxlifetime)
     {
         return $this->wrappedSessionHandler->gc($maxlifetime);
@@ -60,6 +63,7 @@ class WriteCheckSessionHandler implements \SessionHandlerInterface
     /**
      * {@inheritdoc}
      */
+    #[\ReturnTypeWillChange]
     public function open($savePath, $sessionName)
     {
         return $this->wrappedSessionHandler->open($savePath, $sessionName);
@@ -68,6 +72,7 @@ class WriteCheckSessionHandler implements \SessionHandlerInterface
     /**
      * {@inheritdoc}
      */
+    #[\ReturnTypeWillChange]
     public function read($sessionId)
     {
         $session = $this->wrappedSessionHandler->read($sessionId);
@@ -80,6 +85,7 @@ class WriteCheckSessionHandler implements \SessionHandlerInterface
     /**
      * {@inheritdoc}
      */
+    #[\ReturnTypeWillChange]
     public function write($sessionId, $data)
     {
         if (isset($this->readSessions[$sessionId]) && $data === $this->readSessions[$sessionId]) {

@@ -532,7 +532,7 @@ class Request
      */
     public function overrideGlobals()
     {
-        $this->server->set('QUERY_STRING', static::normalizeQueryString(http_build_query($this->query->all(), null, '&')));
+        $this->server->set('QUERY_STRING', static::normalizeQueryString(http_build_query($this->query->all(), "", '&')));
 
         $_GET = $this->query->all();
         $_POST = $this->request->all();
@@ -1336,7 +1336,7 @@ class Request
      */
     public function getFormat($mimeType)
     {
-        if (false !== $pos = strpos($mimeType, ';')) {
+        if (false !== $pos = strpos($mimeType ?: '', ';')) {
             $mimeType = substr($mimeType, 0, $pos);
         }
 
@@ -1545,7 +1545,7 @@ class Request
      */
     public function getETags()
     {
-        return preg_split('/\s*,\s*/', $this->headers->get('if_none_match'), null, PREG_SPLIT_NO_EMPTY);
+        return preg_split('/\s*,\s*/', $this->headers->get('if_none_match') ?: "", -1, PREG_SPLIT_NO_EMPTY);
     }
 
     /**
@@ -1755,13 +1755,13 @@ class Request
      */
     protected function prepareBaseUrl()
     {
-        $filename = basename($this->server->get('SCRIPT_FILENAME'));
+        $filename = basename($this->server->get('SCRIPT_FILENAME', ""));
 
-        if (basename($this->server->get('SCRIPT_NAME')) === $filename) {
+        if (basename($this->server->get('SCRIPT_NAME', "") ) === $filename) {
             $baseUrl = $this->server->get('SCRIPT_NAME');
-        } elseif (basename($this->server->get('PHP_SELF')) === $filename) {
+        } elseif (basename($this->server->get('PHP_SELF', "")) === $filename) {
             $baseUrl = $this->server->get('PHP_SELF');
-        } elseif (basename($this->server->get('ORIG_SCRIPT_NAME')) === $filename) {
+        } elseif (basename($this->server->get('ORIG_SCRIPT_NAME', "")) === $filename) {
             $baseUrl = $this->server->get('ORIG_SCRIPT_NAME'); // 1and1 shared hosting compatibility
         } else {
             // Backtrack up the script_filename to find the portion matching
@@ -1798,7 +1798,7 @@ class Request
             $truncatedRequestUri = substr($requestUri, 0, $pos);
         }
 
-        $basename = basename($baseUrl);
+        $basename = basename($baseUrl ?: "");
         if (empty($basename) || !strpos(rawurldecode($truncatedRequestUri), $basename)) {
             // no match whatsoever; set it blank
             return '';
@@ -1821,7 +1821,7 @@ class Request
      */
     protected function prepareBasePath()
     {
-        $filename = basename($this->server->get('SCRIPT_FILENAME'));
+        $filename = basename($this->server->get('SCRIPT_FILENAME') ?: "");
         $baseUrl = $this->getBaseUrl();
         if (empty($baseUrl)) {
             return '';

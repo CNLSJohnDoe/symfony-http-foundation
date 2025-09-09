@@ -142,6 +142,7 @@ class Session implements SessionInterface, \IteratorAggregate, \Countable
      *
      * @return \ArrayIterator An \ArrayIterator instance
      */
+    #[\ReturnTypeWillChange]
     public function getIterator()
     {
         return new \ArrayIterator($this->storage->getBag($this->attributeName)->all());
@@ -152,6 +153,7 @@ class Session implements SessionInterface, \IteratorAggregate, \Countable
      *
      * @return int The number of attributes
      */
+    #[\ReturnTypeWillChange]
     public function count()
     {
         return count($this->storage->getBag($this->attributeName)->all());

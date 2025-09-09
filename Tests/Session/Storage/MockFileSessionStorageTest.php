@@ -43,7 +43,7 @@ class MockFileSessionStorageTest extends \PHPUnit_Framework_TestCase
         $this->sessionDir = null;
         $this->storage = null;
         array_map('unlink', glob($this->sessionDir.'/*.session'));
-        if (is_dir($this->sessionDir)) {
+        if (is_dir($this->sessionDir ?: "")) {
             rmdir($this->sessionDir);
         }
     }

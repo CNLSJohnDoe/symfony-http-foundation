@@ -96,6 +96,7 @@ class File extends \SplFileInfo
      *
      * @api
      */
+    #[\ReturnTypeWillChange]
     public function getExtension()
     {
         return pathinfo($this->getBasename(), PATHINFO_EXTENSION);

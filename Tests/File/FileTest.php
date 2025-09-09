@@ -169,7 +169,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
 
     protected function createMockGuesser($path, $mimeType)
     {
-        $guesser = $this->getMock('Symfony\Component\HttpFoundation\File\MimeType\MimeTypeGuesserInterface');
+        $guesser = $this->createMock('Symfony\Component\HttpFoundation\File\MimeType\MimeTypeGuesserInterface');
         $guesser
             ->expects($this->once())
             ->method('guess')

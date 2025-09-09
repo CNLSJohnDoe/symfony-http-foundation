@@ -41,7 +41,7 @@ interface SessionHandlerInterface
      *
      * @return bool true on success, false on failure
      */
-    public function open($savePath, $sessionName);
+    public function open($savePath, $sessionName): bool;
 
     /**
      * Closes the current session.
